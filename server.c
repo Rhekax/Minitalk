@@ -6,7 +6,7 @@
 /*   By: mdursun <mdursun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:38:19 by mdursun           #+#    #+#             */
-/*   Updated: 2024/11/14 21:25:22 by mdursun          ###   ########.fr       */
+/*   Updated: 2024/11/15 13:40:52 by mdursun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	handler(int signum, siginfo_t *info, void *context)
 		bit_count = 0;
 		current_char = 0;
 	}
-	usleep(50);
 	kill(info->si_pid, SIGUSR1);
 }
 

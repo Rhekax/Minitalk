@@ -9,7 +9,6 @@ LIBFT_PATH=libft
 LIBFT=$(LIBFT_PATH)/libft.a
 FT_PRINTF_LIB_FLAGS=-L $(FT_PRINTF_PATH) -l ftprintf -I $(FT_PRINTF_PATH)
 FT_LIBFT_LIB_FLAGS=-L $(LIBFT_PATH) -lft -I $(LIBFT_PATH)
-
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
 

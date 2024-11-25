@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdursun <mdursun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 19:54:43 by mdursun           #+#    #+#             */
-/*   Updated: 2024/11/14 19:55:34 by mdursun          ###   ########.fr       */
+/*   Created: 2024/11/09 13:38:27 by mdursun           #+#    #+#             */
+/*   Updated: 2024/11/15 13:46:11 by mdursun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+volatile sig_atomic_t	g_flag;
+
 static void	client_handler(int sig)
 {
+	g_flag = 1;
 	if (sig == SIGUSR1)
 		return ;
 }
@@ -28,11 +31,13 @@ static void	send_message(int pid, char *message)
 		i = 8;
 		while (i--)
 		{
+			g_flag = 0;
 			if (((*message >> i) & 1) == 1)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			pause();
+			if (!g_flag)
+				pause();
 		}
 		message++;
 	}
